@@ -1,6 +1,9 @@
 package com.ryanlanz.promanage.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.ryanlanz.promanage.model.enums.Status;
 
@@ -11,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,8 +58,13 @@ public class ProjectModel {
     private LocalDate dueDate;
 
     @Column(name = "completed_date",nullable = true)
-    private LocalDate completedDate;
+    private LocalDateTime completedDate;
 
     @Column(name = "status")
     private Status status;
+
+    @OneToMany(mappedBy = "project")
+    private Set<TaskModel> tasks = new HashSet<>();
+
+    
 }

@@ -10,15 +10,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id; 
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
+
 @Entity
 @Table(name = "employees")
+@Getter@Setter@NoArgsConstructor
 public class EmployeesModel {
     
     @Id
@@ -36,7 +35,7 @@ public class EmployeesModel {
     private LocalDate hireDate;
     
     @Column(name = "active",columnDefinition = "boolean default true")
-    private Boolean acvtive = true;
+    private Boolean active = true;
 
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private UsersModel user;

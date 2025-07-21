@@ -14,14 +14,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Table; 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "users")
-@Getter @Setter @AllArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class UsersModel {
     
     @Id
@@ -36,7 +36,7 @@ public class UsersModel {
     @Column(name = "created_at",nullable = false)
     private LocalDate createdAt;
 
-    @Column(name = "created_by",nullable = false)
+    @Column(name = "created_by",nullable = true)
     private Long createdBy;
 
     @Column(name = "username",nullable = false)
@@ -55,11 +55,9 @@ public class UsersModel {
     private Set<TeamUsersModel> teamMemberships = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<ProjectModel> createdProjects = new HashSet<>();
-    /*
+    private Set<ProjectModel> createdProjects = new HashSet<>(); 
     
     @OneToMany(mappedBy = "user")
-    private Set<Task> tasks = new HashSet<>();
-    */ 
+    private Set<TaskModel> tasks = new HashSet<>(); 
  
 }
