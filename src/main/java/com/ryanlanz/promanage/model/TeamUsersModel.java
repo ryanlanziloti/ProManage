@@ -29,5 +29,6 @@ public class TeamUsersModel {
     private TeamRoles role;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
     private TeamModel TeamModel;
 }
