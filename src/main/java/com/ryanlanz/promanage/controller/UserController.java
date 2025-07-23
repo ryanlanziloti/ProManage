@@ -1,5 +1,7 @@
 package com.ryanlanz.promanage.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,5 +23,10 @@ public class UserController {
     @GetMapping("/{userId}/with-task")
     public ResponseEntity<UserDTO>  findWithTask(@PathVariable Long userId){
         return ResponseEntity.ok(service.getUserWithTask(userId));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>>  getAll(){
+        return ResponseEntity.ok(service.getAll());
     }
 }

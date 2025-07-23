@@ -3,6 +3,9 @@ package com.ryanlanz.promanage.model.mapper;
 import org.mapstruct.Mapping;
 
 import com.ryanlanz.promanage.model.TaskModel;
+
+import java.util.List;
+
 import org.mapstruct.Mapper; 
 import org.mapstruct.NullValuePropertyMappingStrategy;
   
@@ -20,4 +23,8 @@ public interface TaskMapper {
     @Mapping(target = "user.id", source = "userId")
     @Mapping(target = "project.id", source = "projectId")
     TaskModel toEntity(TaskDTO taskDTO);
+
+    default List<TaskDTO> toTaskDTOList(List<TaskModel> teams){
+        return teams.stream().map(this::toTaskDTO).toList();
+    }
 }

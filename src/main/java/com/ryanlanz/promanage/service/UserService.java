@@ -1,5 +1,7 @@
 package com.ryanlanz.promanage.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,10 @@ public class UserService {
     private UserMapper mapper;
 
     //GET
+    public List<UserDTO> getAll(){
+        return mapper.toUserDTOList(repository.findAll());
+    }
+
     public UserDTO getUserWithTask(Long userId){
         UsersModel user = repository.findUserWithTasks(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
         return mapper.toUserDTO(user);

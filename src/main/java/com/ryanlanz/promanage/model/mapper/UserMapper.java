@@ -1,10 +1,14 @@
 package com.ryanlanz.promanage.model.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
- 
-import com.ryanlanz.promanage.model.UsersModel; 
+
+import com.ryanlanz.promanage.model.TaskModel;
+import com.ryanlanz.promanage.model.UsersModel;
+import com.ryanlanz.promanage.model.DTO.TaskDTO;
 import com.ryanlanz.promanage.model.DTO.UserDTO;
 
 @Mapper(componentModel = "spring", 
@@ -21,5 +25,9 @@ public interface UserMapper extends TaskMapper{
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "employee", ignore = true)
     UsersModel toEntity(UserDTO userDTO);
+
+    default List<UserDTO> toUserDTOList(List<UsersModel> users){
+        return users.stream().map(this::toUserDTO).toList();
+    }
 
 }

@@ -10,9 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn; 
 import jakarta.persistence.ManyToOne; 
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "team_users")
+@Getter @Setter @NoArgsConstructor
 public class TeamUsersModel {
     
     @Id
@@ -30,5 +34,5 @@ public class TeamUsersModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
-    private TeamModel TeamModel;
+    private TeamModel teamModel;
 }
