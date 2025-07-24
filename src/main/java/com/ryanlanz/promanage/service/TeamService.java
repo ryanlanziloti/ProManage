@@ -24,10 +24,30 @@ public class TeamService {
         return mapper.toDTOList(repository.findAll());
     }
 
+    public TeamDTO getById(Long id){
+        return mapper.toDTO(repository.findById(id).orElseThrow());
+    }
     //POST
     public TeamDTO create(TeamDTO teamDTO){
         TeamModel teamModel = mapper.toEntity(teamDTO);
         return mapper.toDTO(repository.save(teamModel));
+    }
+
+    //PUT
+    public TeamDTO update(TeamDTO teamDTO){
+        TeamModel teamModel = mapper.toEntity(teamDTO);
+        repository.findById(teamModel.getId())
+            .orElseThrow(() -> new RuntimeException("Team not found with id: " + teamModel.getId()));
+        return mapper.toDTO(repository.save(teamModel));
+    }
+
+    //DELETE
+    public boolean deleteTeam(Long id){
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }

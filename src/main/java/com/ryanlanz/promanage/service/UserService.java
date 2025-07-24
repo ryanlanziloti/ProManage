@@ -26,9 +26,31 @@ public class UserService {
         return mapper.toUserDTOList(repository.findAll());
     }
 
-    public UserDTO getUserWithTask(Long userId){
-        UsersModel user = repository.findUserWithTasks(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        return mapper.toUserDTO(user);
+    public UserDTO getById(Long id){
+        return mapper.toUserDTO(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id)));
+    }
+
+    //POST
+    public UserDTO create(UserDTO userDTO){
+        UsersModel userModel = mapper.toEntity(userDTO);
+        return mapper.toUserDTO(repository.save(userModel));
+    }
+
+    //PUT
+    public UserDTO update(UserDTO userDTO){
+        UsersModel userModel = mapper.toEntity(userDTO);
+        repository.findById(userModel.getId())
+            .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userModel.getId()));
+        return mapper.toUserDTO(repository.save(userModel));
+    }
+
+    //DELETE
+    public boolean deleteUser(Long id){
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }

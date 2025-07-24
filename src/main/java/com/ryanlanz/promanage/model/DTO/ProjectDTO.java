@@ -13,7 +13,7 @@ public record ProjectDTO(
     String projectDescription,
     LocalDate createdAt,
     Long createdBy,
-    LocalDate updateAt,
+    LocalDate updatedAt,
     Long updatedBy,
     LocalDate dueDate,
     LocalDateTime completedDate,
